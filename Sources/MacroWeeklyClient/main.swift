@@ -1,3 +1,4 @@
+import Foundation
 import MacroWeekly
 import MacroWeeklyMacros
 
@@ -9,3 +10,8 @@ struct WeeklyTestModel {
 }
 
 let testingMacroModel = WeeklyTestModel.shared
+
+// Ej 2
+
+print(#Localizable("TEST_KEY_1"))
+print(NSLocalizedString("TEST_KEY_1", comment: ""))

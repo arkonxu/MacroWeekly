@@ -10,16 +10,6 @@ Una **macro** en Swift es una forma de escribir código que se genera automátic
 
 Las macros permiten que el código sea más eficiente, manteniendo las tareas comunes automatizadas y optimizadas, reduciendo los errores comunes en patrones de código repetitivos.
 
-## Ventajas de Usar Macros
-
-1. **Reducción de Código Repetitivo**: Al utilizar macros, se puede evitar la duplicación de código, lo que facilita el mantenimiento y la legibilidad del mismo.
-
-2. **Consistencia**: Las macros garantizan que el código generado sea uniforme, lo que reduce la posibilidad de errores al copiar y pegar código similar en diferentes partes de la aplicación.
-
-3. **Optimización en Tiempo de Compilación**: Al generar código en el momento de la compilación, se pueden realizar optimizaciones que mejoran el rendimiento de la aplicación en tiempo de ejecución.
-
-4. **Facilidad de Mantenimiento**: Las macros permiten modificar un solo lugar en el código para actualizar todas las instancias donde se aplica la macro, facilitando así el mantenimiento.
-
 ## Tipos de anotacion `@attached`
 
 La anotación `@attached` permite especificar cómo y dónde se puede aplicar la macro. Aquí hay una descripción de los parámetros que se pueden utilizar:

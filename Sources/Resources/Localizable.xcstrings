@@ -1,0 +1,30 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "TEST_KEY_1" : {
+      "comment" : "NO COMMENT",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HELLO"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HOLA"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SALUT"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -8,4 +8,4 @@ public macro Singleton() = #externalMacro(module: "MacroWeeklyMacros", type: "Si
 
 
 @freestanding(expression)
-public macro Localize(_ value: String) -> String = #externalMacro(module: "MacroWeeklyMacros", type: "LocalizableMacro")
+public macro Localizable(_ value: String) -> String = #externalMacro(module: "MacroWeeklyMacros", type: "LocalizableMacro")
