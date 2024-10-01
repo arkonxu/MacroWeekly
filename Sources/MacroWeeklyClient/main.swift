@@ -13,5 +13,8 @@ let testingMacroModel = WeeklyTestModel.shared
 
 // Ej 2
 
+let url = #URL("https://google.es")
+
+// Ej 3
+
 print(#Localizable("TEST_KEY_1"))
-print(NSLocalizedString("TEST_KEY_1", comment: ""))
