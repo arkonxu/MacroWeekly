@@ -1,33 +1,48 @@
-import SwiftCompilerPlugin
 import SwiftSyntax
 import SwiftSyntaxBuilder
 import SwiftSyntaxMacros
 
-/// Implementation of the `stringify` macro, which takes an expression
-/// of any type and produces a tuple containing the value of that expression
-/// and the source code that produced the value. For example
-///
-///     #stringify(x + y)
-///
-///  will expand to
-///
-///     (x + y, "x + y")
-public struct StringifyMacro: ExpressionMacro {
-    public static func expansion(
-        of node: some FreestandingMacroExpansionSyntax,
+struct SingletonMacro: MemberMacro {
+    static func expansion(
+        of node: AttributeSyntax,
+        providingMembersOf declaration: some DeclGroupSyntax,
         in context: some MacroExpansionContext
-    ) -> ExprSyntax {
-        guard let argument = node.argumentList.first?.expression else {
-            fatalError("compiler bug: the macro does not have any arguments")
+    ) throws -> [DeclSyntax] {
+        guard [SwiftSyntax.SyntaxKind.classDecl, .structDecl].contains(declaration.kind) else {
+            throw SingletonMacroError.notAStructOrClass
         }
-
-        return "(\(argument), \(literal: argument.description))"
+        
+        let nameOfDecl = try name(providingMembersOf: declaration).text
+        let initializer = try InitializerDeclSyntax("private init()") {}
+        
+        let shared = "static let shared = \(nameOfDecl)()"
+        
+        return [
+            DeclSyntax(stringLiteral: shared),
+            DeclSyntax(initializer),
+        ]
     }
 }
 
-@main
-struct MacroWeeklyPlugin: CompilerPlugin {
-    let providingMacros: [Macro.Type] = [
-        StringifyMacro.self,
-    ]
+private extension SingletonMacro {
+    static func name(providingMembersOf declaration: some DeclGroupSyntax) throws -> TokenSyntax {
+        if let classDecl = declaration.as(ClassDeclSyntax.self) {
+            classDecl.name
+        } else if let structDecl = declaration.as(StructDeclSyntax.self) {
+            structDecl.name
+        } else {
+            throw SingletonMacroError.notAStructOrClass
+        }
+    }
+}
+
+enum SingletonMacroError: Error, CustomStringConvertible {
+    case notAStructOrClass
+    
+    var description: String {
+        switch self {
+            case .notAStructOrClass:
+                "Can only be applied to a struct or class"
+        }
+    }
 }

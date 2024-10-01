@@ -1,8 +1,11 @@
 import MacroWeekly
+import MacroWeeklyMacros
 
-let a = 17
-let b = 25
+// Ej 1:
 
-let (result, code) = #stringify(a + b)
+@Singleton
+struct WeeklyTestModel {
+    let name = "Test"
+}
 
-print("The value \(result) was produced by the code \"\(code)\"")
+let testingMacroModel = WeeklyTestModel.shared

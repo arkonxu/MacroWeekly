@@ -2,40 +2,43 @@
 
 ## Introducción
 
-Las macros en Swift permiten generar código en tiempo de compilación, lo que reduce la necesidad de tareas repetitivas, mejora el mantenimiento y asegura la consistencia en tu código. Este README proporcionará una visión general sobre qué son las macros, los tipos de macros, y un ejemplo de cómo crear una macro básica en Swift.
+Las macros en Swift permiten generar código en tiempo de compilación, lo que reduce la necesidad de tareas repetitivas, mejora el mantenimiento y asegura la consistencia en tu código.
 
 ## ¿Qué es una Macro?
 
-Una **macro** en Swift es una forma de escribir código que genera automáticamente otro código durante el proceso de compilación. Son útiles para eliminar código repetitivo y mejorar el rendimiento, ya que ciertas operaciones se definen y optimizan antes de que la aplicación se ejecute.
+Una **macro** en Swift es una forma de escribir código que se genera automáticamente durante el proceso de compilación. Son útiles para eliminar código repetitivo y mejorar el rendimiento, ya que ciertas operaciones se definen y optimizan antes de que la aplicación se ejecute.
 
 Las macros permiten que el código sea más eficiente, manteniendo las tareas comunes automatizadas y optimizadas, reduciendo los errores comunes en patrones de código repetitivos.
 
-## Tipos de Macros
+## Ventajas de Usar Macros
 
-Existen diferentes tipos de macros en Swift. La siguiente imagen muestra una clasificación general:
+1. **Reducción de Código Repetitivo**: Al utilizar macros, se puede evitar la duplicación de código, lo que facilita el mantenimiento y la legibilidad del mismo.
 
-![Tipos de macros](https://asynclearn.com/static/9ca59f93d12266a5e076ad558fdb67c2/819a9/macro-types.png)
+2. **Consistencia**: Las macros garantizan que el código generado sea uniforme, lo que reduce la posibilidad de errores al copiar y pegar código similar en diferentes partes de la aplicación.
 
-### Tipos Principales:
+3. **Optimización en Tiempo de Compilación**: Al generar código en el momento de la compilación, se pueden realizar optimizaciones que mejoran el rendimiento de la aplicación en tiempo de ejecución.
 
-1. **Expression Macros (Macros de Expresión):** Generan expresiones y valores.
-2. **Declaration Macros (Macros de Declaración):** Añaden declaraciones (por ejemplo, funciones, propiedades).
-3. **Code-Generation Macros (Macros de Generación de Código):** Automatizan la creación de grandes bloques de código basados en reglas definidas.
+4. **Facilidad de Mantenimiento**: Las macros permiten modificar un solo lugar en el código para actualizar todas las instancias donde se aplica la macro, facilitando así el mantenimiento.
 
-## Ejemplo de Macro en Swift
+## Tipos de anotacion `@attached`
 
-A continuación se muestra un ejemplo básico de cómo definir y usar una macro en Swift:
+La anotación `@attached` permite especificar cómo y dónde se puede aplicar la macro. Aquí hay una descripción de los parámetros que se pueden utilizar:
 
-```swift
-@macro
-public macro AutoInit() = #externalMacro(module: "MyMacroModule", type: "AutoInitMacro")
+1. **member**: Indica que la macro puede adjuntarse a miembros de clases o estructuras.
 
-// Uso de la macro para generar automáticamente el código de inicialización
-struct User {
-    var id: Int
-    var name: String
-    var email: String
+2. **accessor**: Permite que la macro se adjunte a métodos que actúan como accesores (getters y setters) para propiedades.
 
-    // La macro generará automáticamente el inicializador basado en las propiedades
-    #AutoInit
-}
+3. **conformance**: Utilizado para que la macro agregue conformidad a un protocolo a una clase o estructura.
+
+4. **extension**: Habilita que la macro se aplique como una extensión de tipos existentes.
+
+5. **memberAttribute**: Se usa para adjuntar atributos a miembros de clases o estructuras.
+
+6. **peer**: Permite agregar funcionalidades que afectan a instancias de tipos específicos o modifican el comportamiento de tipos en relación con otros.
+
+## Tipos de Macros `freestanding`
+
+Además de las macros adjuntas, Swift también admite macros **freestanding** que operan de manera más flexible en diferentes partes del código.
+
+1. **`declaration`**: Las macros `declaration` operan sobre declaraciones completas como clases, funciones o variables. Este tipo de macro te permite generar o modificar declaraciones antes de que el código se compile.
+2. **`expression`**: Las macros expression se utilizan para modificar o generar nuevas expresiones dentro de las declaraciones, como operaciones matemáticas o condiciones.
