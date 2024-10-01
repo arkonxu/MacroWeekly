@@ -8,6 +8,7 @@ struct Plugins: CompilerPlugin {
   let providingMacros: [Macro.Type] = [
     SingletonMacro.self,
     LocalizableMacro.self,
-    URLMacro.self
+    URLMacro.self,
+    PrintArrayMacro.self
   ]
 }
